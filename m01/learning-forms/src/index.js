@@ -3,7 +3,6 @@
 import React from 'react'
 import { render } from 'react-dom'
 import { AppContainer } from 'react-hot-loader'
-// import App from './app-with-lifecycle-methods'
 import App from './app'
 
 const renderApp = (NextApp) => {
@@ -17,12 +16,6 @@ const renderApp = (NextApp) => {
 
 renderApp(App)
 
-// if (module.hot) {
-//   module.hot.accept('./app-with-lifecycle-methods', () => {
-//     const NextApp = require('./app-with-lifecycle-methods').default
-//     renderApp(NextApp)
-//   })
-// }
 if (module.hot) {
   module.hot.accept('./app', () => {
     const NextApp = require('./app').default

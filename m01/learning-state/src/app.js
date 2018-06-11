@@ -7,7 +7,7 @@ class App extends Component {
   render () {
     return (
       <div>
-        <Button>
+        <Button handleClick={() => console.log('clicou')}>
           Clique em mim
         </Button>
       </div>

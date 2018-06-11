@@ -13,7 +13,7 @@ class App extends Component {
   //   }
   // }
   constructor () {
-    console.log('constructor app')
+    console.log('constructor app foi agora')
     super()
     this.state = {
       color: 'red',
@@ -23,11 +23,11 @@ class App extends Component {
   }
 
   componentWillMount () {
-    console.log('componentWillMount app')
+    console.log('componentWillMount app aconteceu agora')
   }
 
   componentDidMount () {
-    console.log('componentDidMount app')
+    console.log('componentDidMount app aconteceu agora')
   }
   render () {
     console.log('render app')
@@ -36,7 +36,7 @@ class App extends Component {
         <Timer time={this.state.time} />
         <button onClick={() => {
           this.setState({ time: this.state.time + 10 })
-        }}>Change Props</button>
+        }}>Change Props two new</button>
       </div>
     )
   }
