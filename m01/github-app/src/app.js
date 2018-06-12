@@ -30,7 +30,9 @@ class App extends Component {
             repos: result.public_repos,
             followers: result.followers,
             following: result.following
-          }
+          },
+          repos: [],
+          starred: []
         })
         console.log(result)
         // userinfo: {
@@ -46,12 +48,28 @@ class App extends Component {
     console.log(keyCode)
   }
 
+  getRepos (type) {
+    return (e) => {
+      ajax().get(`https://api.github.com/users/${this.state.userinfo.login}/${type}`)
+      .then((result) => {
+        this.setState({
+          [type]: result.map((repo) => ({
+            name: repo.name,
+            link: repo.html_url
+          }))
+        })
+      })
+    }
+  }
+
   render () {
     return <AppContent
       userinfo={this.state.userinfo}
       repos={this.state.repos}
       starred={this.state.starred}
       handleSearch={(e) => this.handleSearch(e)}
+      getRepos={this.getRepos('repos')}
+      getStarred={this.getRepos('starred')}
     />
   }
 }
