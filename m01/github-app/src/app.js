@@ -10,17 +10,31 @@ class App extends Component {
     this.state = {
       userinfo: null,
       repos: [],
-      starred: []
+      starred: [],
+      isFetching: false
     }
+  }
+
+  getGitHubApiUrl (username, type) {
+    const internalUser = username ? `/${username}` : ''
+    const internalType = type ? `/${type}` : ''
+    return `https://api.github.com/users${internalUser}${internalType}`
   }
 
   handleSearch (e) {
     const value = e.target.value
     const keyCode = e.which || e.keyCode
     const ENTER = 13
+    // const target = e.target
+    // e.persist() // persiste o objeto
 
     if (keyCode === ENTER) {
-      ajax().get(`https://api.github.com/users/${value}`)
+      // target.disabled = true
+
+      // ajax().get(`https://api.github.com/users/${value}`)
+
+      this.setState({ isFetching: true })
+      ajax().get(this.getGitHubApiUrl(value))
       .then((result) => {
         this.setState({
           userinfo: {
@@ -35,22 +49,20 @@ class App extends Component {
           starred: []
         })
         console.log(result)
-        // userinfo: {
-        //   username: 'Fernando Daciuk',
-        //   photo: 'https://avatars3.githubusercontent.com/u/910377?v=4',
-        //   login: 'fdaciuk',
-        //   repos: 12,
-        //   followers: 10,
-        //   following: 10
-        // }
       })
+      // .always(() => {
+      //   target.disabled = false
+      // })
+      .always(() => this.setState({ isFetching: false }))
     }
     console.log(keyCode)
   }
 
   getRepos (type) {
     return (e) => {
-      ajax().get(`https://api.github.com/users/${this.state.userinfo.login}/${type}`)
+      const username = this.state.userinfo.login
+      // ajax().get(`https://api.github.com/users/${username}/${type}`)
+      ajax().get(this.getGitHubApiUrl(username, type))
       .then((result) => {
         this.setState({
           [type]: result.map((repo) => ({
@@ -64,9 +76,11 @@ class App extends Component {
 
   render () {
     return <AppContent
-      userinfo={this.state.userinfo}
-      repos={this.state.repos}
-      starred={this.state.starred}
+      // userinfo={this.state.userinfo}
+      // repos={this.state.repos}
+      // starred={this.state.starred}
+      // isFetching={this.state.isFetching}
+      {...this.state}
       handleSearch={(e) => this.handleSearch(e)}
       getRepos={this.getRepos('repos')}
       getStarred={this.getRepos('starred')}
