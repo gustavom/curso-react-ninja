@@ -54,9 +54,15 @@ module.exports = validate({
         test: /\.css$/,
         exclude: /node_modules/,
         include: /src/,
-        loaders: ['style', 'css?modules']
+        loaders: ['style', 'css?modules&localIdentName=[local]']
         // loaders: ['style','raw']
       }
     ]
+  },
+  resolve:{
+    alias:{
+      src: path.join(__dirname, 'src'),
+      components: path.join(__dirname, 'src', 'components')
+    }
   }
 })
