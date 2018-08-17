@@ -1,18 +1,24 @@
-// you can use this file to add your custom webpack plugins, loaders and anything you like.
-// This is just the basic way to add addional webpack configurations.
-// For more information refer the docs: https://goo.gl/qPbSyX
+'use strict'
 
-// IMPORTANT
-// When you add this file, we won't add the default configurations which is similar
-// to "React Create App". This only has babel loader to load JavaScript.
+const webpackConfig = require('@kadira/storybook/dist')
 
 module.exports = {
-  plugins: [
-    // your custom plugins
-  ],
   module: {
-    loaders: [
-      // add your custom loaders.
-    ],
-  },
-};
+    preLoaders: [{
+      test: /\.js$/,
+      exclude: /node_modules/,
+      include: /src/,
+      loader: 'standard'
+    }],
+
+    loaders:[{
+      test: /\.css$/,
+      exclude: /node_modules/,
+      include: /src/,
+      // loaders: ['style', 'css?modules&localIdentName=[local]']
+      loaders: ['style', 'css?modules&localIdentName=[path][name]__[local]--[hash:base64:15]']
+      // loaders: ['style','raw']
+    }]
+
+  }
+}
