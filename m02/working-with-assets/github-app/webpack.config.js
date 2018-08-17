@@ -54,7 +54,8 @@ module.exports = validate({
         test: /\.css$/,
         exclude: /node_modules/,
         include: /src/,
-        loaders: ['style', 'css?modules&localIdentName=[local]']
+        // loaders: ['style', 'css?modules&localIdentName=[local]']
+        loaders: ['style', 'css?modules&localIdentName=[path][name]__[local]--[hash:base64:15]']
         // loaders: ['style','raw']
       }
     ]
