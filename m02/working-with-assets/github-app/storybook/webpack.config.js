@@ -24,10 +24,10 @@ const webpackConfig = require('@kadira/storybook/dist/server/config/defaults/web
 // }
 
 
-module.exports = function (config. env) {
+module.exports = function (config, env) {
   const newConfig = webpackConfig(config, env)
 
-  newConfig.mobule.preLoaders = (newConfig.module.preLoaders || []).concat({
+  newConfig.module.preLoaders = (newConfig.module.preLoaders || []).concat({
     test: /\.js$/,
     exclude: /node_modules/,
     include: /src/,
