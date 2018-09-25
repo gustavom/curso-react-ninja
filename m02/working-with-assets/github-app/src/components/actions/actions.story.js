@@ -5,15 +5,10 @@ import React from 'react'
 import Actions from './index'
 
 const stories = storiesOf('Div', module)
-stories.add('first story', () => (
+
+stories.add('Actions Component', () => (
   <Actions
     getRepos={action('Get Repos')}
     getStarred={action('Get Starred')}
   />
   ))
-stories.add('first story', () => (
-  <Actions
-    getRepos={action('Get Repos')}
-    getStarred={action('Get Starred')}
-  />
-))
