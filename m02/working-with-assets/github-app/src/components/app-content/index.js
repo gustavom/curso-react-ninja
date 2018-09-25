@@ -7,7 +7,15 @@ import Actions from 'components/actions'
 import Repos from 'components/repos'
 import style from './app.css'
 
-const AppContent = ({userinfo, repos, starred, isFetching, handleSearch, getRepos, getStarred}) => (
+const AppContent = ({
+  userinfo,
+  repos,
+  starred,
+  isFetching,
+  handleSearch,
+  getRepos,
+  getStarred
+}) => (
   <div className={style.app}>
     <Search isDisabled={isFetching} handleSearch={handleSearch} />
     {isFetching && <div>Carregando...</div>}
@@ -15,22 +23,13 @@ const AppContent = ({userinfo, repos, starred, isFetching, handleSearch, getRepo
     {!!userinfo && <Actions getRepos={getRepos} getStarred={getStarred} />}
     {/* !!transforma em bolleano */}
 
-    {!!repos.length &&
-      <Repos
-        className='repos'
-        title='Repositórios'
-        repos={repos}
-      />
-    }
+    {!!repos.length && (
+      <Repos className='repos' title='Repositórios' repos={repos} />
+    )}
 
-    {!!starred.length &&
-      <Repos
-        className='starred'
-        title='Favoritos'
-        repos={starred}
-      />
-    }
-
+    {!!starred.length && (
+      <Repos className='starred' title='Favoritos' repos={starred} />
+    )}
   </div>
 )
 
